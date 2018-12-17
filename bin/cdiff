@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+bin_path="$(dirname "${BASH_SOURCE[0]}")";
+
+diff -wup $@ | pygmentize -O style=monokai -O encoding=UTF-8 -f 256 -l diff | $bin_path/diff-highlight | less -RLnF;

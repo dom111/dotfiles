@@ -1,0 +1,113 @@
+" Force 256 colors
+set t_Co=256
+
+let g:Powerline_theme = 'default'
+
+set foldcolumn=4
+":hi Comment ctermbg=black ctermfg=cyan
+set foldmethod=manual
+nmap <Leader>nt :NERDTree<cr>
+nmap <Leader>tl :TlistOpen<cr>
+nmap <Leader>t :tabnew<cr>
+" Quick tab movement
+nmap <Leader>tn :tabnext<cr>
+nmap <Leader>tp :tabprev<cr>
+
+nmap <Leader>u :!perl ~/.vim/update-plugins.pl<cr>
+syn on
+let loaded_matchparen = 1
+set ai
+
+" Proper tabs (e.g. spaces)
+set ts=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
+
+set nobackup
+set nowritebackup
+set noswapfile
+
+set nowrap
+set smartindent
+set number
+set hls
+set hidden
+set showmatch
+
+if has('gui_running')
+    set guioptions-=T
+    set guioptions-=m
+    colors darkspectrum
+    set gfn=Monospace\ 9
+    " Disable scrollbars
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=b
+else
+    colors twilight
+endif
+set laststatus=2
+
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Quicksave
+noremap <C-S> :update<CR>
+
+" Quick split movement
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+noremap <c-h> <c-w>h
+
+" Quick sort
+vnoremap <Leader>s :sort<cr>
+
+" Quick indenting
+vnoremap < <gv
+vnoremap > >gv
+
+" File type indenting
+filetype plugin indent on
+
+" Highlight long line marker
+set colorcolumn=80
+highlight ColorColumn ctermbg=233 guibg=grey15
+
+" Tone down line number column
+highlight LineNr ctermfg=darkgrey
+
+" Pathogen
+call pathogen#infect()
+call pathogen#helptags()
+
+" For sanity sake
+"filetype on
+"filetype plugin on
+"filetype indent on
+
+" Quick function completion
+inoremap <c-]> <c-x><c-]>
+"" Tip: convert buffers to tabs: :tab ba
+"" Remember: Tab /delim
+
+let perl_fold = 1
+
+" Bracket pairing
+inoremap {<CR> {<CR>}<Esc>O
+
+" highlight whitespaces
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:.
+
+hi FoldColumn guifg=cyan guibg=none
+hi FoldColumn ctermfg=cyan ctermbg=none
+hi Folded ctermbg=none ctermfg=white
+
+" Fill in your own dev token, get one from here: https://www.evernote.com/api/DeveloperToken.action
+" Must have +python build of vim
+"source ~/.vimrc-evervim
+

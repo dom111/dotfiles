@@ -1,0 +1,21 @@
+#!/bin/bash
+
+output=$2;
+
+if [[ -z $output ]]; then
+    output="cmd=";
+fi
+
+function _get_child_processes {
+    ps -o pid= --ppid $1;
+}
+
+processes=$(_get_child_processes $1);
+
+if [[ -n $processes ]]; then
+    for child in $processes; do
+        _get_child_processes $child;
+    done
+else
+    echo $(ps f -o $output --pid $1);
+fi

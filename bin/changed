@@ -1,0 +1,54 @@
+#!/bin/bash
+
+bin_path="$(dirname ${BASH_SOURCE[0]})";
+uuid=$(date +%s);
+
+if [[ -e $1 ]]; then
+    last_change=$(stat -c %Y $1);
+    last_change=$((uuid - last_change));
+else
+    last_change=302;
+fi
+
+trap "{ if [[ -e /tmp/changed.$uuid ]]; then echo Removing\ /tmp/changed.$uuid; rm -f /tmp/changed.$uuid; fi; exit 1; }" SIGINT SIGTERM SIGKILL;
+
+if [[ $last_change -ne "1" ]]; then
+    s='s';
+fi
+
+if [[ $last_change -lt 301 ]]; then
+    echo "File was modified $last_change second$s ago, would you like to wait anyway? [y/N]";
+    read -sn1 choice;
+
+    if [[ $choice != 'y' && $choice != 'Y' ]]; then
+        echo "Exiting as advised.";
+        exit 0;
+    fi
+
+    echo "Waiting as instructed...";
+fi
+
+if [[ -e $1 ]]; then
+    cp $1 "/tmp/changed.$uuid";
+
+    inotifywait -q -e modify "$1" > /dev/null;
+
+    $bin_path/cdiff --label 'original-file' --label 'watched-file' "/tmp/changed.$uuid" $1;
+    rm "/tmp/changed.$uuid"; # clean up
+else
+    echo "$1 doesn't exist, would you like to wait for it to be created? [y/N]";
+    read -sn1 choice;
+
+    if [[ $choice != 'y' && $choice != 'Y' ]]; then
+        echo "Exiting as advised.";
+        exit 0;
+    fi
+
+    while [[ ! -e $1 ]]; do
+        sleep 1;
+    done
+
+    echo "$1 created...";
+fi
+
+exit 0;

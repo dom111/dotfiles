@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function _get_cmd {
+    ps -o cmd= -p $1;
+}
+
+function _get_user {
+    ps -o user= -p $1;
+}
+
+function _get_parent {
+    ps -o ppid= -p $1;
+}
+
+parent=$1;
+is_cron="";
+
+while [[ -n $parent && $parent -gt 1 ]]; do
+    if [[ $cmd = "-bash" ]]; then
+        break;
+    fi
+
+    pid=$parent;
+    user=$(_get_user $parent);
+    cmd=$(_get_cmd $parent);
+
+    # echo "$cmd - $pid - $user";
+
+    if [[ $cmd = *"crond"* ]]; then
+        is_cron=" (via cron)";
+    fi
+
+    if [[ $user -ne "root" ]] && [[ $user -ne "webop" ]]; then
+        parent=0;
+    else
+        parent=$(_get_parent $parent);
+    fi
+done
+
+echo "$user$is_cron";
+

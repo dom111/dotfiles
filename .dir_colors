@@ -1,0 +1,413 @@
+# Monokai color theme for the color GNU ls utility.
+# Designed for dircolors (GNU coreutils) 5.97
+#
+# This file was largely inspired by seebi/dircolors-solarized on github.
+#
+# How the colors were selected:
+# - Terminal emulators often have an option typically enabled by default that makes
+#   bold a different color.  It is important to leave this option enabled so that
+#   you can access the entire 16-color palette, and not just 8 colors.
+# - We favor universality over a greater number of colors.  So we limit the number
+#   of colors so that this theme will work out of the box in all terminals.
+# - We choose to have the following category of files:
+#   NORMAL & FILE, DIR, LINK, EXEC and
+#   editable text including source, unimportant text, binary docs & multimedia source
+#   files, viewable multimedia, archived/compressed, and unimportant non-text
+# - See table below to see the assignments.
+
+
+# Installation instructions
+# This file goes in the /etc directory, and must be world readable.
+# You can copy this file to .dir_colors in your $HOME directory to override
+# the system defaults.
+
+# Init {{{
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR tty
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM ansi
+TERM color_xterm
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM Eterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM nxterm
+TERM putty
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode256
+TERM rxvt-unicode-256color
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-bce
+TERM screen.linux
+TERM screen-w
+TERM vt100
+TERM xterm
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+#############################################################################
+# Below are the color init strings for the basic file types. A color init
+# string consists of one or more of the following numeric codes:
+#
+# Attribute codes:
+#   00=none 01=bold 04=underscore 05=blink 07=reverse 08=concealed
+# Text color codes:
+#   30=black 31=red 32=green 33=yellow 34=blue 35=magenta 36=cyan 37=white
+# Background color codes:
+#   40=black 41=red 42=green 43=yellow 44=blue 45=magenta 46=cyan 47=white
+#
+# NOTES:
+# - See http://www.oreilly.com/catalog/wdnut/excerpt/color_names.html
+# - Color combinations
+#   ANSI Color code       Monokai
+#   ~~~~~~~~~~~~~~~       ~~~~~~~~~
+#   00    none
+#   30    black           black
+#   01;30 bright black    bright black
+#   31    red             red
+#   01;31 bright red      orange
+#   32    green           green
+#   01;32 bright green    bright green
+#   33    yellow          yellow
+#   01;33 bright yellow   bright yellow
+#   34    blue            blue
+#   01;34 bright blue     bright blue
+#   35    magenta         magenta
+#   01;35 bright magenta  violet
+#   36    cyan            cyan
+#   01;36 bright cyan     bright cyan
+#   37    white           white
+#   01;37 bright white    bright white
+#   05;37;41
+
+# }}}
+# File type {{{
+
+# global default
+NORMAL 00
+# normal file
+FILE 00
+# directory
+DIR 38;5;81
+# symbolic link
+LINK 38;5;141
+
+# pipe, socket, block device, character device (blue bg)
+FIFO 30;48;5;81
+SOCK 30;48;5;81
+DOOR 30;48;5;81 # Solaris 2.5 and later
+BLK  30;48;5;81
+CHR  30;48;5;81
+
+# }}}
+# File attributes {{{
+
+# Orphaned symlinks (blinking white on red)
+# Blink may or may not work (works on iTerm dark or light, and Putty dark)
+ORPHAN  05;38;5;255;48;5;197
+# ... and the files that orphaned symlinks point to (blinking white on red)
+MISSING 05;38;5;255;48;5;197
+# dir that is sticky and other-writable (+t,o+w)
+STICKY_OTHER_WRITABLE 30;48;5;154
+# dir that is other-writable (o+w) and not sticky
+OTHER_WRITABLE 30;48;5;154
+
+SUID 37;48;5;197
+SGID 30;48;5;186
+
+# files with execute permission
+EXEC 38;5;197  # Unix
+.cmd 38;5;197  # Win
+.exe 38;5;197  # Win
+.com 38;5;197  # Win
+.bat 38;5;197  # Win
+.reg 38;5;197  # Win
+.app 38;5;197  # OSX
+
+# }}}
+# File extension {{{
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+
+# Text {{{
+
+.diff 38;5;186
+.patch 38;5;186
+.txt 38;5;186
+.org 38;5;186
+.md 38;5;186
+.mkd 38;5;186
+
+# }}}
+# Dotfiles {{{
+.DS_Store 38;5;101
+.autofsck 38;5;101
+.autorelabel 38;5;101
+.bash_history 38;5;101
+.bash_logout 38;5;101
+.bash_profile 38;5;101
+.bashrc 38;5;101
+.cshrc 38;5;101
+.emacs 38;5;101
+.gitconfig 38;5;101
+.gitignore 38;5;101
+.inputrc 38;5;101
+.lesshst 38;5;101
+.pgg_blacklist 38;5;101
+.screenrc 38;5;101
+.sqlconf 38;5;101
+.sqlplus_history 38;5;101
+.tcshrc 38;5;101
+.viminfo 38;5;101
+.vimrc 38;5;101
+.zshrc 38;5;101
+
+# }}}
+# Source {{{
+
+.C 38;5;154
+.c 38;5;154
+.cc 38;5;154
+.csh 38;5;154
+.css 38;5;154
+.cxx 38;5;154
+.el 38;5;154
+.h 38;5;154
+.hs 38;5;154
+.htm 38;5;154
+.html 38;5;154
+.java 38;5;154
+.js 38;5;154
+.logic 38;5;154
+.man 38;5;154
+.objc 38;5;154
+.php 38;5;154
+.pl 38;5;154
+.pm 38;5;154
+.pod 38;5;154
+.py 38;5;154
+.rb 38;5;154
+.rdf 38;5;154
+.sh 38;5;154
+.shtml 38;5;154
+.tex 38;5;154
+.tmpl 38;5;154
+.vim 38;5;154
+.xml 38;5;154
+.zsh 38;5;154
+
+# }}}
+# Image {{{
+.bmp 38;5;141
+.cgm 38;5;141
+.dl 38;5;141
+.dvi 38;5;141
+.emf 38;5;141
+.eps 38;5;141
+.gif 38;5;141
+.jpeg 38;5;141
+.jpg 38;5;141
+.JPG 38;5;141
+.mng 38;5;141
+.pbm 38;5;141
+.pcx 38;5;141
+.pdf 38;5;141
+.pgm 38;5;141
+.png 38;5;141
+.ppm 38;5;141
+.pps 38;5;141
+.ppsx 38;5;141
+.ps 38;5;141
+.svg 38;5;141
+.svgz 38;5;141
+.tga 38;5;141
+.tif 38;5;141
+.tiff 38;5;141
+.xbm 38;5;141
+.xcf 38;5;141
+.xpm 38;5;141
+.xwd 38;5;141
+.xwd 38;5;141
+.yuv 38;5;141
+
+# }}}
+# Audio {{{
+
+.aac 38;5;141
+.au  38;5;141
+.flac 38;5;141
+.mid 38;5;141
+.midi 38;5;141
+.mka 38;5;141
+.mp3 38;5;141
+.mpa 38;5;141
+.mpeg 38;5;141
+.mpg 38;5;141
+.ogg  38;5;141
+.ra 38;5;141
+.wav 38;5;141
+
+# }}}
+# Video {{{
+
+.anx 38;5;141
+.asf 38;5;141
+.avi 38;5;141
+.axv 38;5;141
+.flc 38;5;141
+.fli 38;5;141
+.flv 38;5;141
+.gl 38;5;141
+.m2v 38;5;141
+.m4v 38;5;141
+.mkv 38;5;141
+.mov 38;5;141
+.mp4 38;5;141
+.mp4v 38;5;141
+.mpeg 38;5;141
+.mpg 38;5;141
+.nuv 38;5;141
+.ogm 38;5;141
+.ogv 38;5;141
+.ogx 38;5;141
+.qt 38;5;141
+.rm 38;5;141
+.rmvb 38;5;141
+.swf 38;5;141
+.vob 38;5;141
+.wmv 38;5;141
+
+# }}}
+# Documents {{{
+
+.doc 38;5;186
+.docx 38;5;186
+.rtf 38;5;186
+.dot 38;5;186
+.dotx 38;5;186
+.xls 38;5;186
+.xlsx 38;5;186
+.ppt 38;5;186
+.pptx 38;5;186
+.fla 38;5;186
+.psd 38;5;186
+
+# }}}
+# Archives {{{
+
+.7z   38;5;141
+.apk  38;5;141
+.arj  38;5;141
+.bin  38;5;141
+.bz   38;5;141
+.bz2  38;5;141
+.cab  38;5;141  # Win
+.deb  38;5;141
+.dmg  38;5;141  # OSX
+.gem  38;5;141
+.gz   38;5;141
+.iso  38;5;141
+.jar  38;5;141
+.msi  38;5;141  # Win
+.rar  38;5;141
+.rpm  38;5;141
+.tar  38;5;141
+.tbz  38;5;141
+.tbz2 38;5;141
+.tgz  38;5;141
+.tx   38;5;141
+.war  38;5;141
+.xpi  38;5;141
+.xz   38;5;141
+.z    38;5;141
+.Z    38;5;141
+.zip  38;5;141
+
+# }}}
+# Testing {{{
+
+.ANSI-black 30
+.ANSI-black-bright 01;30
+.ANSI-red 31
+.ANSI-red-bright 01;31
+.ANSI-green 32
+.ANSI-green-bright 01;32
+.ANSI-yellow 33
+.ANSI-yellow-bright 01;33
+.ANSI-blue 34
+.ANSI-blue-bright 01;34
+.ANSI-magenta 35
+.ANSI-magenta-bright 01;35
+.ANSI-cyan 36
+.ANSI-cyan-bright 01;36
+.ANSI-white 37
+.ANSI-white-bright 01;37
+
+# }}}
+# Custom {{{
+
+# Unimportant text files
+*# 38;5;154
+*~ 38;5;154
+.log 38;5;154
+
+# Unimportant non-text files
+*,v 30;48;5;101
+.BAK 30;48;5;101
+.DIST 30;48;5;101
+.OFF 30;48;5;101
+.OLD 30;48;5;101
+.ORIG 30;48;5;101
+.bak 30;48;5;101
+.dist 30;48;5;101
+.off 30;48;5;101
+.old 30;48;5;101
+.org_archive 30;48;5;101
+.orig 30;48;5;101
+.swo 30;48;5;101
+.swp 30;48;5;101
+
+# }}}
+
+# }}}
+

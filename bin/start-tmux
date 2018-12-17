@@ -1,0 +1,40 @@
+#!/bin/bash
+
+if [[ $1 = "-f" ]]; then
+    force=1;
+fi
+
+if [[ -z "$TMUX" || $force = 1 ]]; then
+    # start tmux
+    tmux_sessions=$(tmux list-sessions);
+    tmux_session_count=$(wc -l <<< "$tmux_sessions");
+
+    if [[ $tmux_session_count = 1 ]]; then
+        echo "Starting tmux in 5 seconds...";
+        read -rsn1 -t5;
+        tmux attach;
+    elif [[ $tmux_session_count = 0 ]]; then
+        echo "No tmux sessions found, would you like to start one? [Y/n]";
+        read -sn1 choice;
+     
+        if [[ $choice = 'n' || $choice = 'N' ]]; then
+            exit 1;
+        else
+            tmux;
+        fi
+    else
+        tmux_sessions=$(tmux list-sessions);
+
+        if [[ $tmux_sessions = *"main window"* && $force != 1 ]]; then
+            tmux attach -t "main window";
+        else
+            echo "Multiple tmux sessions found:";
+            echo $tmux_sessions;
+            echo "Which session would you like to join?";
+            read choice;
+            tmux attach -t "$choice";
+        fi
+    fi
+else
+    echo "Already running... Use $0 -f to start anyway.";
+fi

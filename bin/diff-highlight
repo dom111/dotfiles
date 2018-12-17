@@ -1,0 +1,5 @@
+#!/bin/bash
+
+bin_path="$(dirname "${BASH_SOURCE[0]}")";
+
+perl $bin_path/diff-highlight.perl;
