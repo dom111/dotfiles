@@ -24,7 +24,7 @@ RED="\[\e[38;5;197m\]";
 RESET="\[\e[0m\]";
 
 EDITOR="vim";
-PS1="$BLUE\u$PURPLE@$GREEN\h$YELLOW\$(__git_ps1 ' [%s]') $RED\w $PURPLE\$$RESET";
+PS1="$BLUE\u$PURPLE@$GREEN\h$YELLOW\$(__git_ps1 ' [%s]') $RED\w $PURPLE\\\$$RESET";
 # PS1="\[\e[49;38;5;209m\]\u\[\e[49;38;5;229m\]@\[\e[49;38;5;81m\]\h\[\e[49;38;5;149m\]\$(__git_ps1 ' [%s]') \[\e[49;38;5;209m\]\w \[\e[49;38;5;229m\]\$\[\e[0m\]";
 SERVER_ROOT=/home/dhastings/perlgem/server/apache2;
 SERVER_PREFIX=dhastings;

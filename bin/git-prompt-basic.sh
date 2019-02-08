@@ -1,32 +1,42 @@
 # a version of __git_ps1 that should show the current branch quickly without many git commands
 
 function __git_ps1() {
-  local path="$(git rev-parse --show-toplevel)/.git";
-  local branch="$(cat ${P}HEAD | sed -re 's/.+\///g')";
+  local path="$(git rev-parse --show-toplevel 2>/dev/null)";
 
-  if [[ -d "$path/rebase-merge/" ]]; then
-    if [[ -f "$path/rebase-merge/interactive" ]]; then
-      B="$branch|MERGING-i";
-    else
-      B="$branch|MERGING-m";
+  if [[ -n $path ]]; then
+    local branch="$(cat "$path/.git/HEAD" | sed -re 's/.+\///g')";
+    local format="$@";
+
+    if [[ -z $format ]]; then
+      format=" (%s)";
     fi
-  else
-    if [ -d "$path/rebase-apply" ]; then
-      if [ -f "$path/rebase-apply/rebasing" ]; then
-        B="$branch|REBASE"
-      elif [ -f "$path/rebase-apply/applying" ]; then
-        B="$branch|AM"
+
+    if [[ -d "$path/rebase-merge/" ]]; then
+      if [[ -f "$path/rebase-merge/interactive" ]]; then
+	branch="$branch|MERGING-i";
       else
-        B="$branch|AM/REBASE"
+	branch="$branch|MERGING-m";
       fi
-    elif [ -f "$path/MERGE_HEAD" ]; then
-      B="$branch|MERGING"
-    elif [ -f "$path/CHERRY_PICK_HEAD" ]; then
-      B="$branch|CHERRY-PICKING"
-    elif [ -f "$path/REVERT_HEAD" ]; then
-      B="$branch|REVERTING"
-    elif [ -f "$path/BISECT_LOG" ]; then
-      B="$branch|BISECTING"
+    else
+      if [ -d "$path/rebase-apply" ]; then
+	if [ -f "$path/rebase-apply/rebasing" ]; then
+	  branch="$branch|REBASE"
+	elif [ -f "$path/rebase-apply/applying" ]; then
+	  branch="$branch|AM"
+	else
+	  branch="$branch|AM/REBASE"
+	fi
+      elif [ -f "$path/MERGE_HEAD" ]; then
+	branch="$branch|MERGING"
+      elif [ -f "$path/CHERRY_PICK_HEAD" ]; then
+	branch="$branch|CHERRY-PICKING"
+      elif [ -f "$path/REVERT_HEAD" ]; then
+	branch="$branch|REVERTING"
+      elif [ -f "$path/BISECT_LOG" ]; then
+	branch="$branch|BISECTING"
+      fi
     fi
+
+    printf "$format" "$branch";
   fi
 }

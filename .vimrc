@@ -9,12 +9,6 @@ set shiftwidth=4    " shiftwidth 4 spaces
 set number          " show line number
 set expandtab       " expand tabs
 
-" nicely bind navigation keys
-set t_ku=[A
-set t_kd=[B
-set t_kr=[C
-set t_kl=[D
-
 au BufNewFile,BufRead *.logic set filetype=perlgem
 au BufNewFile,BufRead *.tmpl set filetype=perlgem
 
