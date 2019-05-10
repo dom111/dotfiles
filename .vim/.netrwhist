@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/u02/home/dhastings/drupal/drupal-7.9/sites/cremedelamer2/themes/cremedelamer2_base/template_api/products/cart_item_v1'
-let g:netrw_dirhist_2='/u02/home/dhastings/drupal/drupal-7.9/sites/cremedelamer2/themes/cremedelamer2_base/template_api/products/cart_confirm_v1'
-let g:netrw_dirhist_3='/etc'
-let g:netrw_dirhist_4='/'
-let g:netrw_dirhist_5='/u02/home/dhastings/perlgem/server/apache2.rhel5/lib'
-let g:netrw_dirhist_6='/u02/home/dhastings/drupal/drupal-7.9/sites/bobbibrown/themes/bb_base/scss/components/advent-cal'
