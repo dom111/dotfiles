@@ -1,6 +1,6 @@
 [user]
-        name = Dom Hastings
-        email = dhastings@estee-lauder.co.uk
+        name = dom111
+        email = dom111@users.noreply.github.com
 [push]
         default = tracking
 
@@ -34,12 +34,12 @@
     newreset = 154
 
 [core]
-    pager = less -RLnF
+    pager = less -RLnFX
     editor = vim
 
 [pager]
-    show = diff-highlight | less -RLnF
-    diff = diff-highlight | less -RLnF
+    show = diff-highlight | less -RLnFX
+    diff = diff-highlight | less -RLnFX
 
 [gc]
 	auto = 0

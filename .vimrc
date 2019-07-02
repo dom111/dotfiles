@@ -70,10 +70,10 @@ if &term =~ "xterm"
   endif
 endif
 
-colorscheme vim-monokai-tasty
+silent! colorscheme vim-monokai-tasty
 au VimLeave * :!clear
 
-set list listchars=tab:→\ ,space:·,trail:▓
+set list listchars=tab:⁞\ ,space:·,trail:▓ ",nbsp:﹏
 
 " close buffer with Ctrl + W
 map <C-w> :bd<CR>

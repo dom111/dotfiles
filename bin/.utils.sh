@@ -43,42 +43,42 @@ info() {
     fi
 }
 
-# parse args example
-i=1;
-long_arg=;
-files=;
-
-while [[ $i -le $# ]]; do
-    arg=${!i};
-
-    case $arg in
-        -h|--help)
-            help;
-            exit;
-            ;;
-        -l|--long-arg*)
-            if [[ $arg = *=* ]]; then
-                long_arg=$(awk -F= '{print$2}' <<< $arg);
-            else
-                i=$((i+1));
-                long_arg=${!i};
-            fi
-            ;;
-        -*)
-            warning "Unknown option '$arg', ignoring.";
-            ;;
-        *)
-            if [[ -n $files ]]; then
-                files="$files ${!i}";
-            else
-                files="${!i}";
-            fi
-            ;;
-    esac
-
-    i=$((i+1));
-done
-
-if [[ -z $files ]]; then
-    error "No files specified, aborting.";
-fi
+# # parse args example
+# i=1;
+# long_arg=;
+# files=;
+# 
+# while [[ $i -le $# ]]; do
+#     arg=${!i};
+# 
+#     case $arg in
+#         -h|--help)
+#             help;
+#             exit;
+#             ;;
+#         -l|--long-arg*)
+#             if [[ $arg = *=* ]]; then
+#                 long_arg=$(awk -F= '{print$2}' <<< $arg);
+#             else
+#                 i=$((i+1));
+#                 long_arg=${!i};
+#             fi
+#             ;;
+#         -*)
+#             warning "Unknown option '$arg', ignoring.";
+#             ;;
+#         *)
+#             if [[ -n $files ]]; then
+#                 files="$files ${!i}";
+#             else
+#                 files="${!i}";
+#             fi
+#             ;;
+#     esac
+# 
+#     i=$((i+1));
+# done
+# 
+# if [[ -z $files ]]; then
+#     error "No files specified, aborting.";
+# fi
