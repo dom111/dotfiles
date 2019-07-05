@@ -1,0 +1,3 @@
+# known common mistakes - these are safe
+knowns[gti]=git;
+
