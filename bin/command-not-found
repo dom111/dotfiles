@@ -1,0 +1,64 @@
+#!/bin/bash
+
+bin_path="$(dirname "${BASH_SOURCE[0]}")";
+
+if [[ ! -t 1 ]]; then
+    echo "bash: ${target_cmd}: command not found" >&2;
+    exit 127;
+fi
+
+if [[ $IN_COMMAND_NOT_FOUND -gt 10 ]]; then
+    echo "bash: ${target_cmd}: command not found" >&2;
+    exit 127;
+fi
+
+export IN_COMMAND_NOT_FOUND=$((IN_COMMAND_NOT_FOUND + 1));
+
+failed=$1;
+shift;
+
+# handle non-spaces from `vim`
+if [[ $failed == *"·"* ]]; then
+    cmd=${failed//[·]/ };
+    echo "+ ${cmd}..." >&2;
+    $cmd "$@";
+
+    export IN_COMMAND_NOT_FOUND=;
+    exit $?;
+fi
+
+declare -A knowns;
+
+if [[ -f ${bin_path}/command-not-found-knowns ]]; then
+    source ${bin_path}/command-not-found-knowns;
+fi
+
+if [[ -n ${knowns[$failed]} ]]; then
+    target_cmd=${knowns[$failed]};
+else
+    # get possible commands from `compgen` and parse via Python
+    target_cmd=$(compgen -c | xargs python3 ${bin_path}/rank-args.py $failed);
+
+    if [[ -z $COMMAND_NOT_FOUND_AUTORUN ]]; then
+        if [[ -n $target_cmd ]]; then
+            echo "Would you like to run ${target_cmd} instead of ${failed}? [Y/n]";
+            read -sn1 choice;
+
+            if [[ $choice == 'n' || $choice == 'N' ]]; then
+                exit 127;
+            fi
+        fi
+    fi
+fi
+
+if [[ -n $target_cmd ]]; then
+    echo "+ ${target_cmd}" >&2;
+    $target_cmd "$@";
+    export IN_COMMAND_NOT_FOUND=;
+    exit $?;
+else
+    echo "bash: ${failed}: command not found" >&2;
+fi
+
+export IN_COMMAND_NOT_FOUND=;
+

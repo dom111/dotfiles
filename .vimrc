@@ -1,3 +1,6 @@
+set encoding=utf-8
+scriptencoding utf-8
+
 " This shouldn't be necessary
 set nocompatible
 filetype off
@@ -20,7 +23,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'ncm2/ncm2'
-Plugin 'phpactor/phpactor'
+" Plugin 'phpactor/phpactor' " doesn't work with older vim due to use of v:true
 Plugin 'phpactor/ncm2-phpactor'
 Plugin 'junegunn/fzf.vim'
 Plugin 'neomake/neomake'
@@ -50,7 +53,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-
 set backspace=2
 syntax on           " syntax highlighting
 set mouse=a         " mouse enabled
@@ -73,7 +75,10 @@ endif
 silent! colorscheme vim-monokai-tasty
 au VimLeave * :!clear
 
-set list listchars=tab:⁞\ ,space:·,trail:▓ ",nbsp:﹏
+set list listchars=eol:¶,tab:⁞\ ,trail:▓ ",nbsp:﹏
+if has('patch-7.4.710')
+    set list listchars+=space:·
+endif
 
 " close buffer with Ctrl + W
 map <C-w> :bd<CR>
