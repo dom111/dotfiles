@@ -5,36 +5,40 @@ scriptencoding utf-8
 set nocompatible
 filetype off
 
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" language/syntax specifics
 Plugin 'beyondwords/vim-twig'
 Plugin 'othree/html5.vim'
-" Plugin 'patstockwell/vim-monokai-tasty'
-Plugin 'dom111/vim-monokai-tasty' " a fork of the above
+Plugin 'pangloss/vim-javascript'
+Plugin 'crusoexia/vim-javascript-lib'
+Plugin 'HerringtonDarkholme/yats.vim' " TypeScript
+Plugin 'tobyS/vmustache'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'phpactor/phpactor'
+Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'adoy/vim-php-refactoring-toolbox'
+Plugin 'phpactor/ncm2-phpactor'
+
+" colour scheme
+Plugin 'crusoexia/vim-monokai.git'
+
+" functionality
 Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
 Plugin 'itchyny/lightline.vim'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'stephpy/vim-php-cs-fixer'
 Plugin 'ncm2/ncm2'
-" Plugin 'phpactor/phpactor' " doesn't work with older vim due to use of v:true
-Plugin 'phpactor/ncm2-phpactor'
 Plugin 'junegunn/fzf.vim'
 Plugin 'neomake/neomake'
-Plugin 'adoy/vim-php-refactoring-toolbox'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
-"Plugin 'joonty/vdebug'
-Plugin 'tobyS/vmustache'
+" Plugin 'joonty/vdebug'
 Plugin 'tobyS/pdv'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
@@ -62,6 +66,7 @@ set number          " show line number
 set expandtab       " expand tabs
 
 if &term =~ "xterm"
+  " set termguicolors
   set t_Co=256
   if has("terminfo")
     let &t_Sf=nr2char(27).'[3%p1%dm'
@@ -72,13 +77,13 @@ if &term =~ "xterm"
   endif
 endif
 
-silent! colorscheme vim-monokai-tasty
+silent! colorscheme monokai
 au VimLeave * :!clear
 
 set list listchars=eol:¶,tab:⁞\ ,trail:▓ ",nbsp:﹏
-if has('patch-7.4.710')
-    set list listchars+=space:·
-endif
+"if has('patch-7.4.710')
+"    set list listchars+=space:·
+"endif
 
 " close buffer with Ctrl + W
 map <C-w> :bd<CR>

@@ -27,8 +27,37 @@ if [[ -f ~/bin/command-not-found ]]; then
     }
 fi
 
+commandFailed() {
+    if [ $? == "0" ]; then
+        # do nothing
+        echo -n;
+    else
+        echo -en "\e[48;5;197m $? \e[0m ";
+    fi
+}
+
+buildPS1() {
+    local reset="\e[0m";
+    local blue="\e[38;5;81m";
+    local purple="\e[38;5;141m";
+    local green="\e[38;5;154m";
+    local yellow="\e[38;5;186m";
+    local red="\e[38;5;197m";
+    local redBg="\e[48;5;197m";
+
+    if [[ $1 -gt 0 ]]; then
+        local error=" $redBg $1 $reset";
+    fi
+
+    local gitBranch=$(__git_ps1 "$yellow [%s]$reset");
+
+    echo -en "$blue$2$purple@$green$3$reset$gitBranch $red$4$reset$error";
+}
+
 TERM=xterm-256color;
-PS1='\[\e[38;5;81m\]\u\[\e[38;5;141m\]@\[\e[38;5;154m\]\h\[\e[38;5;186m\]$(__git_ps1 " [%s]") \[\e[38;5;197m\]\w \[\e[38;5;141m\]\$\[\e[0m\]';
+# PS1='\[\e[38;5;81m\]\u\[\e[0m\]\[\e[38;5;141m\]@\[\e[0m\]\[\e[38;5;154m\]\h\[\e[0m\]\[\e[38;5;186m\]$(__git_ps1 " [%s]")\[\e[0m\] \[\e[38;5;197m\]\w\[\e[0m\] \[\e[38;5;141m\]\$\[\e[0m\]';
+#PS1='\[$(echo $?; prevStatus="$?")\]\[\e[38;5;81m\]\u\[\e[0m\]\[\e[38;5;141m\]@\[\e[0m\]\[\e[38;5;154m\]\h\[\e[0m\]\[\e[38;5;186m\]$(__git_ps1 " [%s]")\[\e[0m\] \[\e[38;5;197m\]\w\[\e[0m\] $(echo -n "status($prevStatus) "; [[ $prevStatus -gt 0 ]] && printf "\[\e[48;5;197m\] $? \[\e[0m\] ")\[\e[38;5;141m\]\$\[\e[0m\]';
+PS1='$(buildPS1 "$?" "\u" "\h" "\w")\n'"\[\e[38;5;141m\]\$\[\e[0m\]";
 
 export TERM PS1;
 
