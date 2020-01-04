@@ -9,11 +9,13 @@ fi
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
-bind -f ~/.inputrc;
+if [ -t 1 ] ; then
+    bind -f ~/.inputrc;
+fi
 
 EDITOR="vim";
 INPUTRC=~/.inputrc; # custom keymaps (fix home/end, and force case-insensitivity)
-LESS='-RNF'; # R - raw control codes (colours), N - line numbers, F - auto quit if one screen
+LESS='-XRNF'; # R - raw control codes (colours), N - line numbers, F - auto quit if one screen
 LESSOPEN='|~/.lessfilter %s'; # adds syntax highlighting to less
 
 export EDITOR INPUTRC LESS LESSOPEN;

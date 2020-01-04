@@ -41,6 +41,7 @@ Plugin 'majutsushi/tagbar'
 " Plugin 'joonty/vdebug'
 Plugin 'tobyS/pdv'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'markonm/traces.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
