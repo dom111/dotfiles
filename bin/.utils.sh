@@ -1,3 +1,5 @@
+script_path="$(dirname ${BASH_SOURCE[0]})";
+
 warn() {
     if [[ $1 = -n ]]; then
         shift;

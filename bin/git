@@ -1,0 +1,37 @@
+#!/bin/bash
+
+/usr/bin/git "$@";
+
+result=$?;
+
+if [[ $result -gt 0 ]]; then
+    exit $result;
+fi
+
+if [[ $1 == clone ]]; then
+    target_identity=;
+
+    for identity in $(find ~/.gitidentities/ -type f | xargs -n1 basename); do
+        if [[ "$@" = *$identity* ]]; then
+            if [[ ${#identity} -gt ${#identity_file} ]]; then
+                target_identity=$identity;
+            fi
+        fi
+    done
+
+    # try to determine the location of the cloned repo:
+    # get last argument of previous command - not particularly robust...
+    target_directory=${@:-1};
+
+    if [[ $target_directory == *.git ]]; then
+        target_directory=$(echo $target_directory | awk -F/ '{gsub(/\.git$/, "", $NF); print$NF}');
+    fi
+
+    source_config=~/.gitidentities/$target_identity;
+    target_config=$target_directory/.git/config;
+
+    if [[ -f $source_config ]] && [[ -f $target_config ]]; then
+        cat $source_config >> $target_config;
+    fi
+fi
+

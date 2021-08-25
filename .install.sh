@@ -4,6 +4,17 @@ source bin/.utils.sh;
 
 [ ! -d ./backup ] && mkdir -p ./backup;
 
+has_yum=;
+has_apt=;
+
+if which yum > /dev/null; then
+    has_yum=1;
+fi
+
+if which apt > /dev/null; then
+    has_apt=1;
+fi
+
 # link files
 for file in .bash{rc,_profile} .{vim,input}rc .dir_colors .gitconfig .tmux{.conf,} .lessfilter bin; do
     if [ -f ~/${file} ]; then
@@ -27,12 +38,31 @@ else
 fi
 
 # add in necessary packages
-# if CentOS:
-warn $(info 'Installing pygments, tmux and vim...');
-if which yum > /dev/null; then
+if [[ -n $has_yum ]]; then
+    warn $(info 'Adding GhettoForce repo...');
+    if which rpm > /dev/null; then
+        sudo rpm -Uvh http://mirror.ghettoforge.org/distributions/gf/gf-release-latest.gf.el7.noarch.rpm;
+        sudo rpm --import http://mirror.ghettoforge.org/distributions/gf/RPM-GPG-KEY-gf.el7;
+
+        if which yum-config-manager > /dev/null; then
+            sudo yum-config-manager --enable gf-plus;
+        fi
+    else
+        warn $(error 'Unable to add GhettoForge repo: rpm not found.');
+    fi
+
+    warn $(info 'Installing pygments, tmux and vim...');
     sudo yum install python36-pygments tmux vim-enhanced -y;
-else
-    warn $(error 'Install Pygments, tmux and vim, then `exit` back to continue installation...');
+
+    if which git > /dev/null; then
+        warn $(info 'Installing git...');
+        sudo yum install git;
+    fi
+fi
+
+if [[ -n $has_apt ]]; then
+#    sudo apt install 
+    warn $(error 'TODO...');
 fi
 
 # install fzf
