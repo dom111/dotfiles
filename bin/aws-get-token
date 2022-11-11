@@ -1,0 +1,22 @@
+env="$1";
+
+if [[ -z $env ]]; then
+    env="test";
+fi
+
+aws eks get-token --cluster-name uk01-$env > /tmp/aws-token-data.tmp;
+
+if [[ $? = 255 ]]; then
+    aws-login;
+    aws eks get-token --cluster-name uk01-$env > /tmp/aws-token-data.tmp;
+
+    if [[ $? = 255 ]]; then
+        echo "There was a problem logging in to AWS." >&2;
+        exit 1;
+    fi
+fi
+
+jq -r .status.token < /tmp/aws-token-data.tmp;
+
+echo;
+

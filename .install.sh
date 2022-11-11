@@ -16,7 +16,7 @@ if which apt > /dev/null; then
 fi
 
 # link files
-for file in .bash{rc,_profile} .{vim,input}rc .dir_colors .gitconfig .tmux{.conf,} .lessfilter bin; do
+for file in .bash{rc,_profile} .{vim,input}rc .dir_colors .gitconfig .tmux{.conf,} .lessfilter bin .gitidentities; do
     if [ -f ~/${file} ]; then
         warn "$(warning -n "Moving '")$(info -n "~/${file}")$(warning -n "' to '")$(info -n "./backup/${file}")$(warning -n "'...")";
         mv ~/${file} ./backup/${file};
