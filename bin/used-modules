@@ -1,1 +1,1 @@
-grep -RP --exclude-dir='node_modules' --exclude='*.js' --exclude='*.d.ts' 'from ['\''"]\@civ-clone'|perl -ple '/\@civ-clone\/[^\/]+/;$_=$&'|sort -u
+grep -R --exclude-dir='node_modules' --exclude='*.js' --exclude='*.d.ts' 'from ['\''"]\@civ-clone'|perl -ple '/\@civ-clone\/[^\/]+/;$_=$&'|sort -u

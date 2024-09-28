@@ -126,7 +126,7 @@ NORMAL 00
 # normal file
 FILE 00
 # directory
-DIR 38;5;81
+DIR 38;5;80
 # symbolic link
 LINK 38;5;141
 
@@ -154,13 +154,13 @@ SUID 37;48;5;197
 SGID 30;48;5;186
 
 # files with execute permission
-EXEC 38;5;197  # Unix
-.cmd 38;5;197  # Win
-.exe 38;5;197  # Win
-.com 38;5;197  # Win
-.bat 38;5;197  # Win
-.reg 38;5;197  # Win
-.app 38;5;197  # OSX
+EXEC 38;5;204  # Unix
+.cmd 38;5;204  # Win
+.exe 38;5;204  # Win
+.com 38;5;204  # Win
+.bat 38;5;204  # Win
+.reg 38;5;204  # Win
+.app 38;5;204  # OSX
 
 # }}}
 # File extension {{{
@@ -171,70 +171,74 @@ EXEC 38;5;197  # Unix
 
 # Text {{{
 
-.diff 38;5;186
-.patch 38;5;186
-.txt 38;5;186
-.org 38;5;186
-.md 38;5;186
-.mkd 38;5;186
+.diff 38;5;221
+.patch 38;5;221
+.txt 38;5;221
+.org 38;5;221
+.md 38;5;221
+.mkd 38;5;221
+.json 38;5;221
+.lock 38;5;221
 
 # }}}
 # Dotfiles {{{
-.DS_Store 38;5;101
-.autofsck 38;5;101
-.autorelabel 38;5;101
-.bash_history 38;5;101
-.bash_logout 38;5;101
-.bash_profile 38;5;101
-.bashrc 38;5;101
-.cshrc 38;5;101
-.emacs 38;5;101
-.gitconfig 38;5;101
-.gitignore 38;5;101
-.inputrc 38;5;101
-.lesshst 38;5;101
-.pgg_blacklist 38;5;101
-.screenrc 38;5;101
-.sqlconf 38;5;101
-.sqlplus_history 38;5;101
-.tcshrc 38;5;101
-.viminfo 38;5;101
-.vimrc 38;5;101
-.zshrc 38;5;101
+.autofsck 38;5;209
+.autorelabel 38;5;209
+.bash_history 38;5;209
+.bash_logout 38;5;209
+.bash_profile 38;5;209
+.bashrc 38;5;209
+.cshrc 38;5;209
+.emacs 38;5;209
+.gitconfig 38;5;209
+.gitignore 38;5;209
+.inputrc 38;5;209
+.lesshst 38;5;209
+.screenrc 38;5;209
+.sqlconf 38;5;209
+.sqlplus_history 38;5;209
+.tcshrc 38;5;209
+.viminfo 38;5;209
+.vimrc 38;5;209
+.zshrc 38;5;209
 
 # }}}
 # Source {{{
 
-.C 38;5;154
-.c 38;5;154
-.cc 38;5;154
-.csh 38;5;154
-.css 38;5;154
-.cxx 38;5;154
-.el 38;5;154
-.h 38;5;154
-.hs 38;5;154
-.htm 38;5;154
-.html 38;5;154
-.java 38;5;154
-.js 38;5;154
-.logic 38;5;154
-.man 38;5;154
-.objc 38;5;154
-.php 38;5;154
-.pl 38;5;154
-.pm 38;5;154
-.pod 38;5;154
-.py 38;5;154
-.rb 38;5;154
-.rdf 38;5;154
-.sh 38;5;154
-.shtml 38;5;154
-.tex 38;5;154
-.tmpl 38;5;154
-.vim 38;5;154
-.xml 38;5;154
-.zsh 38;5;154
+.C 38;5;113
+.c 38;5;113
+.cc 38;5;113
+.csh 38;5;113
+.css 38;5;113
+.cxx 38;5;113
+.el 38;5;113
+.h 38;5;113
+.hs 38;5;113
+.htm 38;5;113
+.html 38;5;113
+.java 38;5;113
+.js 38;5;113
+.logic 38;5;113
+.man 38;5;113
+.objc 38;5;113
+.php 38;5;113
+.pl 38;5;113
+.pm 38;5;113
+.pod 38;5;113
+.py 38;5;113
+.rb 38;5;113
+.rdf 38;5;113
+.ru 38;5;113
+.sh 38;5;113
+.shtml 38;5;113
+.tex 38;5;113
+.tmpl 38;5;113
+.vim 38;5;113
+.xml 38;5;113
+.yml 38;5;113
+.zsh 38;5;113
+.Gemfile 38;5;113
+.Dockerfile 38;5;113
 
 # }}}
 # Image {{{
@@ -320,17 +324,17 @@ EXEC 38;5;197  # Unix
 # }}}
 # Documents {{{
 
-.doc 38;5;186
-.docx 38;5;186
-.rtf 38;5;186
-.dot 38;5;186
-.dotx 38;5;186
-.xls 38;5;186
-.xlsx 38;5;186
-.ppt 38;5;186
-.pptx 38;5;186
-.fla 38;5;186
-.psd 38;5;186
+.doc 38;5;221
+.docx 38;5;221
+.rtf 38;5;221
+.dot 38;5;221
+.dotx 38;5;221
+.xls 38;5;221
+.xlsx 38;5;221
+.ppt 38;5;221
+.pptx 38;5;221
+.fla 38;5;221
+.psd 38;5;221
 
 # }}}
 # Archives {{{
@@ -387,11 +391,12 @@ EXEC 38;5;197  # Unix
 # Custom {{{
 
 # Unimportant text files
-*# 38;5;154
-*~ 38;5;154
-.log 38;5;154
+*# 38;5;113
+*~ 38;5;113
+.log 38;5;113
 
 # Unimportant non-text files
+.DS_Store 38;5;101
 *,v 30;48;5;101
 .BAK 30;48;5;101
 .DIST 30;48;5;101

@@ -1,0 +1,18 @@
+#compdef kubens
+
+_kubens() {
+  local state
+
+  if [[ ! -e $HOME/.local/kubens-namespaces ]]; then
+    kubectl get namespaces|tail +2|awk '{print$1}'|tr $'\n' ' ' > $HOME/.local/kubens-namespaces;
+  fi
+
+  _arguments \
+    '1: :->namespace'
+
+  case $state in
+    (namnespace) _arguments '1:profiles:(cat $HOME/.local/kubens-namespaces)' ;;
+  esac
+}
+
+_kubens "$@"

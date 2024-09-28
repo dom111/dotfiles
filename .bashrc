@@ -88,6 +88,9 @@ PS1="$(buildPS1 "$?" "\u" "\h" "\w" "\$")";
 
 export TERM PS1;
 
+export GREP_COLOR="30;48;5;221";
+export GREP_COLORS='sl=97;48;5;236:cx=37;40:mt=30;48;5;221:fn=38;5;204:ln=38;5;113:bn=38;5;141:se=38;5;80';
+
 alias grep="grep --exclude=*{compressed,min}.{js,css} --colour -sIP";
 alias ls='ls --color=auto';
 
@@ -103,3 +106,10 @@ if [ -t 1 ] ; then
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash;
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/dominik.hastings/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
